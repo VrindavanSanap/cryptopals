@@ -9,7 +9,5 @@ expted_base64string = "SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIG\
 byte_form = bytes.fromhex(hex_string)
 base64_form = base64.b64encode(byte_form)
 
-for i in (byte_form):
-  print(i)
 print(base64_form)
 

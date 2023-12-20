@@ -2,10 +2,9 @@
 #include <bitset>
 #include <string>
 using namespace std;
-string hexToBase64(const std::string &hexString){
-    char base64Chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-    string binaryString;
+string hexToBinaryString(const string &hexString){
 
+    string binaryString;
     for (size_t i = 0; i < hexString.length(); i += 2){
         uint8_t byte = stoi(hexString.substr(i, 2), nullptr, 16);
         string byte_string = bitset<8>(byte).to_string();
@@ -14,7 +13,15 @@ string hexToBase64(const std::string &hexString){
 
     }
 
-    while (binaryString.length() % 6 != 0){
+    return binaryString;
+}
+string hexToBase64(const string &hexString){
+    char base64Chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    string binaryString;
+    binaryString = hexToBinaryString(hexString);
+   
+    while (binaryString.length() % 6 != 0)
+    {
         binaryString += "00";
     }
     cout << "binary string: " << binaryString<< std::endl;
