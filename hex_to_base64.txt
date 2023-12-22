@@ -1,0 +1,1 @@
+hex(4 bit) --> decimal --> binary --> decimal--> base64(6 bit)
