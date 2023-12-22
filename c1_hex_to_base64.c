@@ -48,7 +48,7 @@ char* int_to_base64(int n){
     result[1] = '\0';
     return result;
 }
-char* binary_to_base64(const char* binary_string){
+char* binary_to_base64(char* binary_string){
     while(strlen(binary_string)%6 != 0){
         strcat(binary_string, "0");
     }
