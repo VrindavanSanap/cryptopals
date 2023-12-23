@@ -48,9 +48,11 @@ string charToHexString(char character)
     ss << hex << setw(2) << setfill('0') << static_cast<int>(character);
     return ss.str();
 }
-string repeatString(string givenString, int n){
+string repeatString(string givenString, int n)
+{
     string result = "";
-    for (int i = 0; i < n;i++){
+    for (int i = 0; i < n; i++)
+    {
         result += givenString;
     }
     return result;
@@ -66,17 +68,54 @@ string HexStringToString(const std::string &hexString)
     }
     return result;
 }
-
-int main()
+string keepVisibleASCII(const std::string &input)
 {
-    const string s1 = "0e3647e8592d35514a081243582536ed3de6734059001e3f535ce6271032";
-    for (int i = 0; i < 26 * 2;i++){
+    std::string result;
+    for (char ch : input)
+    {
+        // Check if the character is a visible ASCII character or a newline character
+        if (isprint(ch) || ch == '\n')
+        {
+            result += ch;
+        }
+    }
+    return result;
+}
+vector<string> BruteForceXorCipher(string s1)
+{
+    vector<string> decryptedMessages;
+    for (int i = 0; i < 26 * 2; i++)
+    {
         string alphabets = "abcedfghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
         string charHex = charToHexString(alphabets[i]);
         string key = repeatString(charHex, s1.length() / 2);
         string res = xorHexStrings(s1, key);
         res = HexStringToString(res);
-        cout << alphabets[i]<< " --> " << res << endl;
+        res = keepVisibleASCII(res);
+        decryptedMessages.push_back(res);
     }
+    return decryptedMessages;
+}
+void print_vector(vector<string> vec)
+{
+    for (int i = 0; i < vec.size(); i++)
+    {
+        cout << i << "-" << vec[i] << endl;
+    }
+}
+string repeated_xor(string message, string key){
+    string result = "";
+    for (int i = 0; i < message.length(); i++){
+        int byte = (message[i] ^ key[i % key.length()]);
+        string hex_string = binaryToHex(bitset<8>(byte).to_string());
+        result += hex_string;
+    }
+    return result;
+}
+int main()
+{
+    const string stanza = "Burning 'em, if you ain't quick and nimble I go crazy when I hear a cymbal";
+    const string encrypted = repeated_xor(stanza, "ICE");
+    cout << encrypted << endl;
     return 0;
 }

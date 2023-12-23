@@ -13,7 +13,6 @@ function hexToBinary(hexString) {
 function hexToBase64(hexString) { 
     const base64Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
     let binaryString = hexToBinary(hexString)
-
     let base64String = ""
     while (binaryString.length % 6 != 0) { 
         binaryString += "00"

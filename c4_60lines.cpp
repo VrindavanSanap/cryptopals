@@ -68,10 +68,22 @@ string HexStringToString(const std::string &hexString)
     }
     return result;
 }
-
-int main()
+string keepVisibleASCII(const std::string &input)
 {
-    const string s1 = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736";
+    std::string result;
+    for (char ch : input)
+    {
+        // Check if the character is a visible ASCII character or a newline character
+        if (isprint(ch) || ch == '\n')
+        {
+            result += ch;
+        }
+    }
+    return result;
+}
+vector<string> BruteForceXorCipher(string s1)
+{
+    vector<string> decryptedMessages;
     for (int i = 0; i < 26 * 2; i++)
     {
         string alphabets = "abcedfghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -79,7 +91,21 @@ int main()
         string key = repeatString(charHex, s1.length() / 2);
         string res = xorHexStrings(s1, key);
         res = HexStringToString(res);
-        cout << alphabets[i] << " --> " << res << endl;
+        res = keepVisibleASCII(res);
+        decryptedMessages.push_back(res);
     }
+    return decryptedMessages;
+}
+void print_vector(vector<string> vec){
+    for (int i = 0; i < vec.size(); i++)
+    {
+        cout <<i<<"-"<< vec[i] << endl;
+    }
+}
+int main()
+{
+    const string s1 = "0e3647e8592d35514a081243582536ed3de6734059001e3f535ce6271032";
+    vector<string> decryptedMessages = BruteForceXorCipher(s1);
+    print_vector(decryptedMessages);
     return 0;
 }
