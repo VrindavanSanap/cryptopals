@@ -51,13 +51,13 @@ def sentence_chi_squared(sentence):
   expected_freq = expected_prob * length 
   chi_squared_score = chi_squared(expected_freq, word_freq(sentence)) 
   return chi_squared_score
-
 encrypted_message = "aoljhlzhyjpwolypzvulvmaollhysplzaruvduhukzptwslzajpwoly\
 zpapzhafwlvmzbizapabapvujpwolypudopjolhjoslaalypuaolwsh\
 pualeapzzopmalkhjlyahpuubtilyvmwshjlzkvduaolhswohila"
 
 
-
+print(sentence_chi_squared("hello world"))
+exit(-1)
 for i in range(1, 27):
   ciphered = ceaser_cipher(encrypted_message, i)
   score = sentence_chi_squared(ciphered)
