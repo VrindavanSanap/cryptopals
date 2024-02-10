@@ -1,3 +1,3 @@
 # Cryptopals
 
-Solutions for challanges in Crypto pals[https://cryptopals.com/]
+Solutions for challanges in [Cryptopals](https://cryptopals.com)
